@@ -27,6 +27,12 @@ public class ArquivoService {
                 .toList();
     }
 
+    @Cacheable(value="arquivosUsuario", key="#idUsuario")
+    public List<ArquivoDTO> listarArquivosUsuario(Long idUsuario) {
+        return arquivoRepository.findByIdUsuarioOwner(idUsuario).stream().map(arquivo ->
+                toDTO(arquivo, true)).toList();
+    }
+
     @SneakyThrows
     private ArquivoDTO toDTO(Arquivo arquivo, boolean comConteudo) {
         return new ArquivoDTO(
@@ -36,11 +42,5 @@ public class ArquivoService {
                         conversaoService.convert(arquivo.getConteudo(), ConteudoDTO.class)
                         : null
         );
-    }
-
-    @Cacheable(value="arquivosUsuario", key="#idUsuario")
-    public List<ArquivoDTO> listarArquivosUsuario(Long idUsuario) {
-        return arquivoRepository.findByIdUsuarioOwner(idUsuario).stream().map(arquivo ->
-                toDTO(arquivo, true)).toList();
     }
 }
