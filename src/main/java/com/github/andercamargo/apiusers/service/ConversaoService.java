@@ -17,7 +17,7 @@ public class ConversaoService<T> {
     public ConversaoService(){
         this.objectMapper = new ObjectMapper().
                 configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
-                        true).findAndRegisterModules();
+                        false).findAndRegisterModules();
     }
 
     public T convert(String value, Class<T> type)  {
