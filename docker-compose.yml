@@ -1,0 +1,14 @@
+services:
+  api-users:
+    container_name: api-users
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: api-users:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-cloud-network
+networks:
+  spring-cloud-network:
+    driver: bridge
