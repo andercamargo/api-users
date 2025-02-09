@@ -22,7 +22,7 @@ public class ConversaoService<T> {
 
     public T convert(String value, Class<T> type)  {
         try {
-            return objectMapper.readValue(value, type);
+            return this.objectMapper.readValue(value, type);
         } catch (Exception e) {
             log.error("Erro na conversao do objeto. Metodo convert. ",  e);
             throw new RuntimeException(e);
